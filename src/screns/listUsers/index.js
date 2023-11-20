@@ -28,25 +28,25 @@ const ListUsers = () => {
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>Username</Text>
       </View>
-      <InputText placeholder={item.userName} value={editUserName} onChangeText={setEditUserName}  locked={additionalData === 'gladmin'?true:false}    inputWidth={"70%"} />
+      <InputText placeholder={item.userName} value={editUserName} onChangeText={setEditUserName}  locked={additionalData === 'gladmin'?false:false}    inputWidth={"70%"} />
       </View>
       <View style={{flexDirection:'row'}}>
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>DOB</Text>
       </View>
-      <InputText placeholder={item.dob} value={editDob} onChangeText={setEditDob} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
+      <InputText placeholder={item.dob} value={editDob} onChangeText={(text)=>setEditDob(text)} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
       </View>
       <View style={{flexDirection:'row'}}>
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>Email</Text>
       </View>
-      <InputText placeholder={item.email} value={editEmail} onChangeText={setEditEmail} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
+      <InputText placeholder={item.email} value={editEmail} onChangeText={(text)=>setEditEmail(text)} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
       </View>
       <View style={{flexDirection:'row'}}>
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>Mobile</Text>
       </View>
-      <InputText placeholder={item.mobile} value={editMobile} onChangeText={setEditMobile} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
+      <InputText placeholder={item.mobile} value={editMobile} onChangeText={(text)=>setEditMobile(text)} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
       </View>
       <View style={{flexDirection:'row'}}>
       <TouchableOpacity style={{backgroundColor:'gray', width:'30%'}} onPress={()=>editUsersProfileDB(item.userName)}>
@@ -159,6 +159,8 @@ const editUsersProfileDB = async (thisUser) => {
       if (userToUpdateIndex !== -1) {
         // Update the user's DOB
         existingUsers[userToUpdateIndex].dob = editDob;
+        existingUsers[userToUpdateIndex].email = editEmail;
+        existingUsers[userToUpdateIndex].mobile = editMobile;
 
         // Save the updated data back to AsyncStorage
         await AsyncStorage.setItem('users', JSON.stringify(existingUsers));
