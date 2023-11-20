@@ -6,7 +6,7 @@ import React from 'react'
 const InputText = (props) => {
     const {value, onChangeText,locked,placeholder,inputWidth,search,editable,keyboardType,maxLength} = props;
   return (
-    <View style={{marginTop:10, flexDirection:'row'}}>
+    <View style={{marginTop:10, flexDirection:'row', alignSelf:'center'}}>
       <TextInput style={[styles.textInputStyle,{width:inputWidth}]} placeholder={placeholder} value={value} onChangeText={onChangeText} editable={locked} placeholderTextColor={'black'} keyboardType={keyboardType} maxLength={maxLength} ></TextInput>
   
      

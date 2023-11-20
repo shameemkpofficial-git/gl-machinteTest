@@ -19,12 +19,13 @@ export default PrimaryButton
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        width: '100%',
+        width: '80%',
         height: 43,
-        backgroundColor: 'violet',
+        backgroundColor: '#5E72E4',
         borderRadius: 3,
         alignSelf: 'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        marginTop:10
         
     },
     textStyle: {

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import InputText from '../../components/inputText';
-import PrimaryButton from '../../components/primaryButton';
+import { Dimensions, ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import InputText from '../../components/inputText.js';
+import PrimaryButton from '../../components/primaryButton.js';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RocketSvg from '../../assets/svg/rocket.js'
 
 const Login = () => {
   const [password, setPassword] = useState('admin@123');
   const [userName, setUserName] = useState('gladmin');
   const [userDataDV, setUserDataDV] = useState([]);
   const navigation = useNavigation();
+  const screenHeight = Dimensions.get('window').height;
+  const screenWidth = Dimensions.get('window').width;
 
   const handleLogin = async () => {
     if (userName === 'gladmin' && password === 'admin@123') {
@@ -39,18 +42,25 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <View style={{ height: '50%' }} />
-      <View style={{ height: '50%', marginTop: 40, marginHorizontal: 30 }}>
-        <InputText value={userName} onChangeText={setUserName} inputWidth="100%" placeholder="User Name" />
-        <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="100%" />
-        <View style={{ marginTop: 10 }}>
-          <PrimaryButton btnTitle="LOGIN" btnColor="gray" onPress={handleLogin} textColor="#fff" />
+       
+            <View style={{height:'50%', marginTop:20}}>
+            <ImageBackground source={require('../../assets/images/png/wave-bg.png')} style={[styles.imageContainer,{top:-screenHeight/7}]}>
+                <View style={{padding:30, marginTop:88}}>
+                <Text style={styles.mainTitle}>{"GodLand"}</Text>
+                <Text style={styles.descriptionTitle}>{"React Native Machine Test at lorem ipsum \nTest at lorem ipsum"}</Text>
+                </View>
+                <View style={{ padding: screenWidth / 10, marginLeft:screenWidth/1.7}}>
+                    <RocketSvg />
+                </View>
+            </ImageBackground>
+            </View>
+            <View style={{height:'50%', marginTop:40}}>
+            <InputText value={userName} onChangeText={setUserName} inputWidth="80%" placeholder="User Name" />
+            <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="80%" />
+            <PrimaryButton btnTitle={"LOGIN"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={()=> handleLogin()} />
+            <PrimaryButton btnTitle={"SIGN UP"} btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={() => navigation.navigate('SignUp')} />
         </View>
-        <View style={{ marginTop: 30 }}>
-          <PrimaryButton btnTitle="REGISTER" btnColor="gray" textColor="#fff" onPress={() => navigation.navigate('SignUp')} />
-        </View>
-      </View>
-    </SafeAreaView>
+        </SafeAreaView>
   );
 };
 
@@ -61,4 +71,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fafafa',
   },
+  imageContainer: {
+    height: 500,
+    width: '100%',
+    
+},
+mainTitle: {
+    fontSize: 34,
+    fontWeight: '700',
+    lineHeight: 41,
+    textAlign: 'left',
+    // color:'red'
+    color: '#fafafa',
+    
+},
+descriptionTitle: {
+    fontSize: 16,
+    fontWeight: '400',
+    lineHeight: 23,
+    textAlign: 'left',
+    // color:'red'
+    color: '#fafafa',
+    marginTop: 16
+}
 });
