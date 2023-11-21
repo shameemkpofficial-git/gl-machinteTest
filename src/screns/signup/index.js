@@ -81,7 +81,7 @@ const SignUp = () => {
     </View>
     <View style={{height:'50%', bottom:40}}>
         <InputText value={userName} onChangeText={setUserName} inputWidth="80%" placeholder="User Name" />
-         <InputText value={dob} onChangeText={setDob} inputWidth="80%" placeholder="DOB" keyboardType="number-pad" maxLength={8} />
+         <InputText value={dob} onChangeText={setDob} inputWidth="80%" placeholder="06/07/2003" keyboardType="number-pad" maxLength={8} />
          <InputText value={email} onChangeText={setEmail} inputWidth="80%" placeholder="Email" />
         <InputText value={mobile} onChangeText={setMobile} inputWidth="80%" placeholder="Mobile" keyboardType="number-pad" maxLength={10} />
          <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="80%" />
