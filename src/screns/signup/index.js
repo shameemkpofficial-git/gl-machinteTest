@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Dimensions, ImageBackground, SafeAreaView, StyleSheet, View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputText from '../../components/inputText';
 import PrimaryButton from '../../components/primaryButton';
 import { useNavigation } from '@react-navigation/native';
+import RocketSvg from '../../assets/svg/rocket.js'
+
 
 const SignUp = () => {
+  const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
   const [password, setPassword] = useState('');
@@ -19,9 +22,9 @@ const SignUp = () => {
   const handleClearLocal = async () => {
     try {
       await AsyncStorage.clear();
-      console.log('AsyncStorage cleared successfully');
+      alert('AsyncStorage cleared successfully');
     } catch (error) {
-      console.error('Error clearing AsyncStorage: ', error);
+      alert('Error clearing AsyncStorage: ', error);
     }
   };
 
@@ -46,7 +49,7 @@ const SignUp = () => {
         await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
         storeToken('userData');
       } catch (error) {
-        console.error('Error registering user: ', error);
+        alert('Error registering user: ', error);
       }
     } else {
       alert('Invalid email');
@@ -56,30 +59,53 @@ const SignUp = () => {
   const storeToken = async (token) => {
     try {
       await AsyncStorage.setItem('userData', token);
-      console.log('Token stored successfully');
+      alert('stored successfully');
     } catch (error) {
-      console.error('Error storing token: ', error);
+      alert('Error storing token: ', error);
     }
   };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <View style={{ height: '30%' }} />
-      <View style={{ height: '50%', marginTop: 40, marginHorizontal: 0 }}>
-        <InputText value={userName} onChangeText={setUserName} inputWidth="100%" placeholder="User Name" />
-        <InputText value={dob} onChangeText={setDob} inputWidth="100%" placeholder="DOB" keyboardType="number-pad" maxLength={8} />
-        <InputText value={email} onChangeText={setEmail} inputWidth="100%" placeholder="Email" />
-        <InputText value={mobile} onChangeText={setMobile} inputWidth="100%" placeholder="Mobile" keyboardType="number-pad" maxLength={10} />
-        <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="100%" />
-        <View style={{ marginTop: 10 }}>
-          <PrimaryButton btnTitle="REGISTER"  btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleRegister} />
+       
+    <View style={{height:'50%', marginTop:20}}>
+    <ImageBackground source={require('../../assets/images/png/wave-bg.png')} style={[styles.imageContainer,{top:-screenHeight/7}]}>
+        <View style={{padding:30, marginTop:88}}>
+        <Text style={styles.mainTitle}>{"Register"}</Text>
+        <Text style={styles.descriptionTitle}>{"Register and Navigate to login"}</Text>
         </View>
-        <View style={{ marginTop: 30 }}>
-          <PrimaryButton btnTitle="LOGIN"  btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={() => navigation.navigate('Login')} />
-          <PrimaryButton btnTitle="CLEAR LOCAL" btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleClearLocal}  />
+        <View style={{ padding: screenWidth / 10, marginLeft:screenWidth/1.7}}>
+            <RocketSvg />
         </View>
-      </View>
-    </SafeAreaView>
+    </ImageBackground>
+    </View>
+    <View style={{height:'50%', bottom:40}}>
+        <InputText value={userName} onChangeText={setUserName} inputWidth="80%" placeholder="User Name" />
+         <InputText value={dob} onChangeText={setDob} inputWidth="80%" placeholder="DOB" keyboardType="number-pad" maxLength={8} />
+         <InputText value={email} onChangeText={setEmail} inputWidth="80%" placeholder="Email" />
+        <InputText value={mobile} onChangeText={setMobile} inputWidth="80%" placeholder="Mobile" keyboardType="number-pad" maxLength={10} />
+         <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="80%" />
+    <PrimaryButton btnTitle={"LOGIN"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={() => navigation.navigate('Login')} />
+    <PrimaryButton btnTitle={"SIGN UP"} btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleRegister} />
+</View>
+</SafeAreaView>
+    // <SafeAreaView style={styles.mainContainer}>
+    //   <View style={{ height: '30%' }} />
+    //   <View style={{ height: '50%', marginTop: 40, marginHorizontal: 0 }}>
+    //     <InputText value={userName} onChangeText={setUserName} inputWidth="100%" placeholder="User Name" />
+    //     <InputText value={dob} onChangeText={setDob} inputWidth="100%" placeholder="DOB" keyboardType="number-pad" maxLength={8} />
+    //     <InputText value={email} onChangeText={setEmail} inputWidth="100%" placeholder="Email" />
+    //     <InputText value={mobile} onChangeText={setMobile} inputWidth="100%" placeholder="Mobile" keyboardType="number-pad" maxLength={10} />
+    //     <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="100%" />
+    //     <View style={{ marginTop: 10 }}>
+    //       <PrimaryButton btnTitle="REGISTER"  btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleRegister} />
+    //     </View>
+    //     <View style={{ marginTop: 30 }}>
+    //       <PrimaryButton btnTitle="LOGIN"  btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={() => navigation.navigate('Login')} />
+    //       <PrimaryButton btnTitle="CLEAR LOCAL" btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleClearLocal}  />
+    //     </View>
+    //   </View>
+    // </SafeAreaView>
   );
 };
 
@@ -90,4 +116,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fafafa',
   },
+  imageContainer: {
+    height: 500,
+    width: '100%',
+    
+},
+mainTitle: {
+    fontSize: 34,
+    fontWeight: '700',
+    lineHeight: 41,
+    textAlign: 'left',
+    // color:'red'
+    color: '#fafafa',
+    
+},
+descriptionTitle: {
+    fontSize: 16,
+    fontWeight: '400',
+    lineHeight: 23,
+    textAlign: 'left',
+    // color:'red'
+    color: '#fafafa',
+    marginTop: 16
+}
 });

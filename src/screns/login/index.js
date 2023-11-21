@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import InputText from '../../components/inputText.js';
 import PrimaryButton from '../../components/primaryButton.js';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RocketSvg from '../../assets/svg/rocket.js'
 
@@ -36,9 +36,9 @@ const Login = () => {
     console.log('Users from local DB: Login activity', existingUsers);
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
     listUsers();
-  }, []);
+  });
 
   return (
     <SafeAreaView style={styles.mainContainer}>

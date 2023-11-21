@@ -96,15 +96,15 @@ const ListUsers = () => {
           // Save the updated data back to AsyncStorage
           await AsyncStorage.setItem('users', JSON.stringify(existingUsers));
   
-          console.log(`User ${myUsername}'s dob updated successfully.`);
+          alert(`User ${myUsername}'s updated successfully.`);
         } else {
-          console.log(`User with username ${myUsername} not found.`);
+          alert(`User with username ${myUsername} not found.`);
         }
       } else {
-        console.log('No user data found in AsyncStorage.');
+        alert('No user data found in AsyncStorage.');
       }
     } catch (error) {
-      console.error('Error updating user dob:', error);
+      alert('Error updating user dob:', error);
     }
   }
  
