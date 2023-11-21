@@ -24,6 +24,7 @@ const Login = () => {
         alert('Login Success', 'You have successfully logged in!');
         navigation.navigate('ListUsers', { myPropUsername: userName });
       } else {
+        console.log("failed", userDataDV);
         alert('Login Failed', 'Invalid userName or password. Please try again.');
       }
     }
@@ -36,7 +37,7 @@ const Login = () => {
     console.log('Users from local DB: Login activity', existingUsers);
   };
 
-  useFocusEffect(() => {
+  useEffect(() => {
     listUsers();
   });
 

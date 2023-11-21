@@ -85,8 +85,9 @@ const SignUp = () => {
          <InputText value={email} onChangeText={setEmail} inputWidth="80%" placeholder="Email" />
         <InputText value={mobile} onChangeText={setMobile} inputWidth="80%" placeholder="Mobile" keyboardType="number-pad" maxLength={10} />
          <InputText value={password} onChangeText={setPassword} locked placeholder="Password" inputWidth="80%" />
-    <PrimaryButton btnTitle={"LOGIN"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={() => navigation.navigate('Login')} />
     <PrimaryButton btnTitle={"SIGN UP"} btnColor={'#5E72E4'} textColor={'#FFFFFF'}  onPress={handleRegister} />
+    <PrimaryButton btnTitle={"LOGIN"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={() => navigation.navigate('Login')} />
+
 </View>
 </SafeAreaView>
     // <SafeAreaView style={styles.mainContainer}>

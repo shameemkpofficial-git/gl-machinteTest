@@ -23,7 +23,7 @@ const ListUsers = () => {
 
 
   const renderItem = ({ item }) => (
-    <View style={{ padding: 20, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
+    <View style={{ padding: 20, backgroundColor:'#F1F3FF', marginHorizontal:20, borderRadius:20, marginTop:10 }}>
       <View style={{flexDirection:'row'}}>
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>Username</Text>
@@ -49,12 +49,19 @@ const ListUsers = () => {
       <InputText placeholder={item.mobile} value={editMobile} onChangeText={(text)=>setEditMobile(text)} locked={additionalData === 'gladmin'?true:false}  inputWidth={"70%"} />
       </View>
       <View style={{flexDirection:'row'}}>
-      <TouchableOpacity style={{backgroundColor:'gray', width:'30%'}} onPress={()=>editUsersProfileDB(item.userName)}>
+        <View style={{width:'50%'}}>
+      <PrimaryButton btnTitle={"SUBMIT"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={()=>editUsersProfileDB(item.userName)} />
+      </View>
+      <View style={{width:'50%'}}>
+      <PrimaryButton btnTitle={"DELETE USER"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={()=>deleteUserFromStorage(item.userName)} />
+      </View>
+      {/* <TouchableOpacity style={{backgroundColor:'gray', width:'30%'}} onPress={()=>editUsersProfileDB(item.userName)}>
+        
         <Text style={{textAlign:'center', alignSelf:'center'}}>Submit my edit</Text>
       </TouchableOpacity>
       <TouchableOpacity style={{backgroundColor:'gray', width:'30%',marginLeft:10}} onPress={()=>deleteUserFromStorage(item.userName)}>
         <Text style={{textAlign:'center', alignSelf:'center'}}>Delete</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -128,7 +135,7 @@ const ListUsers = () => {
         // Save the updated data back to AsyncStorage
         await AsyncStorage.setItem('users', JSON.stringify(existingUsers));
 
-        console.log(`User ${usernameToDelete} deleted successfully.`);
+        alert(`User ${usernameToDelete} deleted successfully.`);
         setRefresh(prevState => !prevState);
       } else {
         console.log(`User with username ${usernameToDelete} not found.`);
@@ -201,6 +208,7 @@ const editUsersProfileDB = async (thisUser) => {
       <View>
       <Text style={{fontSize:22, color:'black', textAlign:'center', marginTop:10, fontWeight:'600'}}>Edit My Details</Text>
 
+  <View style={{backgroundColor:'#F1F3FF', marginHorizontal:20}}>
      <View style={{flexDirection:'row'}}>
         <View style={{width:'50%'}}>
       <Text style={{fontSize:18, color:'black', textAlign:'center', marginTop:10, fontWeight:'600', width:'40$'}}>Username</Text>
@@ -226,14 +234,16 @@ const editUsersProfileDB = async (thisUser) => {
       <InputText value={myMobile} onChangeText={setMyMobile} locked={true}  inputWidth={"70%"} />
       </View>
       <View style={{margin:20, paddingBottom:40}}>
-      <PrimaryButton btnTitle={"SUBMIT"} btnColor={'gray'} textColor={'#fff'} onPress={()=>editMyProfileDB()}  />
+      <PrimaryButton btnTitle={"SUBMIT"} btnColor={'#5E72E4'} textColor={'#FFFFFF'} onPress={()=>editMyProfileDB()} />
+      
+      </View>
       </View>
       </View>
 
     )
   }
   return (
-    <View>
+    <View style={{backgroundColor:'#fff'}}>
       <Text style={{fontSize:22, color:'black', textAlign:'center', marginTop:10, fontWeight:'600'}}>Users List</Text>
       <FlatList
       data={userList}
